@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	var s1, s2 int
-	fmt.Scan(&s1, &s2)
-	fmt.Println(s1 + s2)
+	var num1, num2 int
+	fmt.Scan(&num1, &num2)
+	fmt.Println(num1 + num2)
 }
