@@ -1,47 +1,64 @@
 #include <iostream>
+#include <string>
 
-bool IsHave(char* pc, char c, int cnt)
+bool IsHave(char* pc, char c)
 {
-    int temp = 0;
     while (*pc != '\0')
     {
-        if (cnt == temp)
+        if (*pc == c)
         {
-            pc++;
-            temp++;
-            continue;
+            return true;
         }
-        if (*pc == c) return true;
         pc++;
-        temp++;
     }
+    *pc = c;
     return false;
+}
+
+char* Jump(char* pc)
+{
+    char c = *pc;
+    while (c == *pc)
+    {
+        pc++;
+    }
+    return pc;
+}
+
+void reset(char* pa)
+{
+    while (*pa != '\0')
+    {
+        *pa = '\0';
+        pa++;
+    }
 }
 
 int main()
 {
     int N, groupCnt = 0;
     std::cin >> N;
+    char ch[200] = {'\0'};
+    char alp[100] = {'\0'};
     for (int i = 0; i < N; i++)
     {
-        char ch[200];
-        int cnt = 0;
         std::cin >> ch;
         char* pc = ch;
         while (1)
         {
-            if (IsHave(ch, *pc, cnt) && *pc != *(pc - 1) && *pc != *(pc + 1))
+            if (IsHave(alp, *pc))
             {
                 break;
             }
+            pc = Jump(pc);
             if (*pc == '\0')
             {
                 groupCnt++;
                 break;
             }
-            cnt++;
-            pc++;
         }
+        ch[0] = {'\0',};
+        reset(alp);
     }
     std::cout << groupCnt;
     return 0;
